@@ -1,0 +1,1103 @@
+/* Base Webflow (normalize + composants utilisés : w-nav, w-form, w-input, w-select, w-button) */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+section {
+  display: block;
+}
+
+a {
+  background-color: transparent;
+}
+
+a:active, a:hover {
+  outline: 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+h1 {
+  margin: .67em 0;
+  font-size: 2em;
+}
+
+img {
+  border: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  color: var(--color-dark);
+  background-color: var(--color-white);
+  min-height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  display: inline-block;
+}
+
+h1, h2, h3 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+h1 {
+  margin-top: 20px;
+  font-size: 38px;
+  line-height: 44px;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 32px;
+  line-height: 36px;
+}
+
+h3 {
+  margin-top: 20px;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+@media screen and (max-width: 767px) {
+  .w-nav-brand {
+    padding-left: 10px;
+  }
+
+}
+
+.w-nav {
+  z-index: 1000;
+  background: var(--color-light);
+  position: relative;
+}
+
+.w-nav:before, .w-nav:after {
+  content: " ";
+  grid-area: 1 / 1 / 2 / 2;
+  display: table;
+}
+
+.w-nav:after {
+  clear: both;
+}
+
+.w-nav-brand {
+  float: left;
+  color: var(--color-dark);
+  text-decoration: none;
+  position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .w-nav-brand {
+    padding-left: 10px;
+  }
+
+}
+
+/* Styles du site Canne TV */
+@font-face {
+  font-family: Dm Sans;
+  src: url("fonts/DMSans-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Barlow Condensed;
+  src: url("fonts/BarlowCondensed-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Barlow Condensed;
+  src: url("fonts/BarlowCondensed-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Palette Léonard Legrand / Sodebo */
+  --color-dark: #1a1a18;
+  --color-light: #f5f2ec;
+  --color-accent: #f07a5c;
+  --color-secondary: #2d4a2b;
+  /* Neutres d'origine (valeurs inchangées) */
+  --color-white: #fff;
+  --color-muted: #7a7870;
+  --color-border: #d8d4cc;
+  --color-light-2: #edeae3;
+  --color-light-50: color-mix(in srgb, var(--color-light) 50%, transparent);
+  /* Variantes lisibles (WCAG AA) */
+  --color-accent-text: #b84528; /* orange foncé pour du texte sur fond clair : 4,8:1 sur le crème */
+  --color-muted-on-dark: color-mix(in srgb, var(--color-light) 55%, var(--color-dark)); /* 5,5:1 sur le noir */
+}
+
+.navbar-wrapper {
+  z-index: 100;
+  background-color: transparent;
+  transition: background-color .3s;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 18px;
+  display: flex;
+  position: fixed;
+  inset: 0% 0% auto;
+}
+
+.logo {
+  color: var(--color-light);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.text-span {
+  color: var(--color-accent);
+}
+
+.button {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  align-self: center;
+  padding: 16px 24px;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .9rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color .2s;
+}
+
+.button:hover {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+}
+
+.button.is-secondary {
+  text-transform: none;
+  text-underline-offset: 4px;
+  background-color: transparent;
+  padding: 16px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.button.is-secondary:hover {
+  color: var(--color-white);
+}
+
+.button.red-background {
+  color: var(--color-dark);
+  background-color: var(--color-accent);
+}
+
+.button.red-background:hover {
+  color: var(--color-light);
+  background-color: var(--color-dark);
+}
+
+.hero-wrapper {
+  background-image: linear-gradient(color-mix(in srgb, var(--color-dark) 50%, transparent), color-mix(in srgb, var(--color-dark) 50%, transparent)), url("images/hero-sodebo.webp");
+  background-position: 60% 50%;
+  background-size: cover;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 680px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar-container {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  display: flex;
+}
+
+.hero-container {
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.heading-1 {
+  color: var(--color-light);
+  text-align: center;
+  letter-spacing: -.01rem;
+  text-transform: uppercase;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: 10rem;
+  font-weight: 900;
+  line-height: 85%;
+}
+
+.heading-1.hero-section {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tv {
+  color: var(--color-accent);
+}
+
+.bandeau {
+  background-color: var(--color-secondary);
+  color: var(--color-light);
+  letter-spacing: .05rem;
+  text-transform: uppercase;
+  padding: 4px 16px;
+  font-family: DM Sans, Arial, sans-serif;
+  font-size: .65rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.hero-cta {
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  display: flex;
+  position: absolute;
+  inset: auto 0% 4%;
+}
+
+.paragraph {
+  color: var(--color-light);
+  letter-spacing: 0;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.paragraph.is-dark {
+  color: var(--color-dark);
+}
+
+.paragraph.is-dark.align-center {
+  text-align: center;
+}
+
+.multiple-button-container {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  display: flex;
+}
+
+.ticker-wrapper {
+  background-color: var(--color-dark);
+  padding: 24px 0;
+  overflow: hidden;
+}
+
+.ticker-text {
+  color: var(--color-light);
+  text-align: center;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-weight: 700;
+}
+
+.red-dot {
+  color: var(--color-accent);
+}
+
+.projet-wrapper {
+  background-color: var(--color-light);
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 120px;
+  padding-bottom: 120px;
+  display: flex;
+}
+
+.grid-x2 {
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+}
+
+.grid-img {
+  flex-flow: column;
+  align-items: flex-start;
+  display: flex;
+  position: relative;
+}
+
+.img-square {
+  aspect-ratio: auto;
+  object-fit: cover;
+  height: 32rem;
+}
+
+.img-square.border-bottom {
+  border-bottom: 5px solid var(--color-accent);
+}
+
+.grid-text {
+  flex-flow: column;
+  justify-content: center;
+  align-items: flex-start;
+  display: flex;
+}
+
+.tag-line-wrapper {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.tag-line-wrapper.is-white {
+  color: var(--color-light);
+}
+
+.red-line {
+  background-color: var(--color-accent);
+  width: 24px;
+  height: 3px;
+}
+
+.tag-text-red {
+  color: var(--color-accent-text);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  word-break: normal;
+  word-spacing: .2rem;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.heading-2 {
+  color: var(--color-dark);
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 100%;
+}
+
+.heading-2.small-margin {
+  margin-top: 10px;
+  line-height: 88%;
+}
+
+.is-red {
+  color: var(--color-accent-text);
+  line-height: 0;
+}
+
+.yellow-tag {
+  z-index: 20;
+  background-color: var(--color-secondary);
+  padding: 6px 20px;
+  position: absolute;
+  inset: 8% auto auto -6%;
+  transform: rotate(-12deg);
+}
+
+.tag-text-yellow {
+  color: var(--color-light);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  word-break: normal;
+  justify-content: center;
+  align-items: center;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+}
+
+.red-banner-wrapper {
+  background-color: var(--color-secondary);
+  padding: 80px 40px;
+}
+
+.red-banner-container {
+  justify-content: space-between;
+  align-items: stretch;
+  display: flex;
+}
+
+.text-container {
+  flex-flow: column;
+  display: flex;
+}
+
+.text-container.align-center {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-container.is-footer {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  width: 16rem;
+}
+
+.heading-3 {
+  color: var(--color-dark);
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 90%;
+}
+
+.heading-3.is-white {
+  color: var(--color-light);
+  margin-top: 10px;
+}
+
+.heading-3.align-center {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tag-text-white {
+  color: var(--color-light);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  word-break: normal;
+  word-spacing: .2rem;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.white-line {
+  background-color: var(--color-light);
+  width: 24px;
+  height: 3px;
+}
+
+.form-wrapper {
+  background-color: var(--color-light);
+  justify-content: center;
+  align-items: center;
+  padding: 80px;
+  display: flex;
+}
+
+.form-container {
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 30rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.footer {
+  background-color: var(--color-dark);
+  flex-flow: column;
+  margin-bottom: 0;
+  padding: 80px 40px 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.small-text {
+  color: var(--color-light);
+  letter-spacing: 0;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.small-text.is-dark {
+  color: var(--color-muted-on-dark);
+}
+
+.divider {
+  background-color: var(--color-muted);
+  width: 100%;
+  height: 1px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.bigtext-footer {
+  color: color-mix(in srgb, var(--color-white) 4%, transparent);
+  text-transform: uppercase;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  white-space: nowrap;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: min(260px, calc((100vw - 80px) / 7.3));
+  font-weight: 900;
+  line-height: 70%;
+}
+
+.big-text-footer-container {
+  flex-flow: column;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+.link-footer {
+  flex-flow: column;
+  display: flex;
+}
+
+.link-footer.is-footer {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  width: 16rem;
+}
+
+.link-text {
+  color: var(--color-light-2);
+  letter-spacing: 0;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.footer-legal {
+  color: var(--color-muted-on-dark);
+  padding-top: 16px;
+  padding-bottom: 24px;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: .75rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Section Courses : cards (structure de template CMS, une par course) */
+.form-container.is-wide {
+  width: 100%;
+  max-width: 64rem;
+}
+
+.course-list-wrapper {
+  width: 100%;
+}
+
+.course-list {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  flex-flow: wrap;
+  align-items: stretch;
+  display: flex;
+}
+
+.course-card {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  flex-flow: column;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+}
+
+.course-card_image {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-bottom: 5px solid var(--color-accent);
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.course-card_body {
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  flex-flow: column;
+  flex: 1;
+  padding: 16px;
+  display: flex;
+}
+
+.course-card_meta {
+  color: var(--color-dark);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  word-spacing: .2rem;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.course-card_title {
+  color: var(--color-dark);
+  letter-spacing: .05rem;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 90%;
+}
+
+.course-card_result {
+  color: var(--color-secondary);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.course-card_text {
+  color: var(--color-dark);
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.course-card_link {
+  color: var(--color-dark);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-underline-offset: 4px;
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 8px;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  transition: color .2s;
+}
+
+.course-card_link.is-soon {
+  cursor: default;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  display: flex;
+}
+
+.course-card_soon, .link-soon {
+  border: 1px solid currentColor;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 991px) {
+  .course-card {
+    flex: 0 1 calc(50% - 8px);
+  }
+
+}
+
+@media screen and (max-width: 479px) {
+  .course-card {
+    flex-basis: 100%;
+  }
+
+}
+
+@media screen and (max-width: 479px) {
+  .button {
+    display: block;
+  }
+
+  .button.red-background {
+    justify-content: center;
+    align-items: center;
+    font-size: .8rem;
+    display: flex;
+  }
+
+  .button.header {
+    padding: 12px 14px;
+    font-size: .75rem;
+  }
+
+  .hero-wrapper {
+    background-position: 65%;
+    height: 600px;
+    min-height: 400px;
+  }
+
+  .navbar-container {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-flow: row;
+    padding-left: .125rem;
+    padding-right: .125rem;
+  }
+
+  .heading-1.hero-section {
+    font-size: 6rem;
+  }
+
+  .hero-cta {
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+
+  .multiple-button-container {
+    flex-flow: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 75%;
+  }
+
+  .grid-x2 {
+    flex-flow: column;
+    display: flex;
+  }
+
+  .img-square.border-bottom {
+    height: 20rem;
+  }
+
+  .tag-line-wrapper.is-white {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .heading-2.small-margin {
+    font-size: 3.5rem;
+  }
+
+  .red-banner-container {
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    flex-flow: column;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .heading-3.is-white {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .heading-3.align-center {
+    font-size: 3rem;
+  }
+
+  .form-wrapper {
+    padding: 40px 20px;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+
+  .bigtext-footer {
+    font-size: min(260px, calc((100vw - 80px) / 7.3));
+  }
+
+}
+
+/* Barre de navigation : états (classe posée par le script) */
+.navbar-wrapper .logo {
+  transition: color .3s;
+}
+
+.navbar-wrapper.is-scrolled {
+  background-color: var(--color-light);
+}
+
+.navbar-wrapper.is-scrolled .logo {
+  color: var(--color-dark);
+}
+
+/* Bandeau : défilement continu (deux groupes identiques, on décale de 50 %) */
+.ticker-track {
+  width: max-content;
+  display: flex;
+  animation: ticker 70s linear infinite;
+}
+
+.ticker-group, .ticker-seq {
+  white-space: nowrap;
+  display: flex;
+}
+
+.ticker-item {
+  padding-left: .6em;
+  padding-right: .6em;
+}
+
+@keyframes ticker {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    width: auto;
+    animation: none;
+    justify-content: center;
+  }
+
+  .ticker-group + .ticker-group, .ticker-seq + .ticker-seq {
+    display: none;
+  }
+
+  .ticker-group, .ticker-seq {
+    white-space: normal;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+}
+
+.sr-only {
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  position: absolute;
+  overflow: hidden;
+}
+
+/* Bloc « en course » */
+.race-status {
+  color: var(--color-light);
+  max-width: 32rem;
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.race-status_day {
+  font-weight: 700;
+}
+
+/* Liens pas encore prêts dans le footer */
+.link-text.is-soon {
+  align-items: center;
+  gap: 8px;
+  display: flex;
+}
+
+.link-soon {
+  color: var(--color-muted-on-dark);
+}
+
+/* Surfaces du navigateur */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--color-dark);
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+}
+
+/* Nav : marges latérales réduites sous 992 px */
+@media screen and (max-width: 991px) {
+  .navbar-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-container {
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
+
+}
+
+@media screen and (max-width: 479px) {
+  .navbar-wrapper .logo {
+    font-size: 1.375rem;
+  }
+
+}
+
+/* Mise en page (layout) */
+/* Les ancres ne passent plus sous la nav fixe */
+section[id], footer[id] {
+  scroll-margin-top: 72px;
+}
+
+/* Titres et résultats des cards : retours à la ligne équilibrés (plus de « S » orphelin) */
+.course-card_title, .course-card_result {
+  text-wrap: balance;
+}
+
+/* Footer : liens avec une vraie zone de clic, logo aligné sur le texte */
+.link-footer.is-footer {
+  grid-row-gap: 0;
+}
+
+.link-footer.is-footer .link-text {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.footer .w-nav-brand {
+  padding-left: 0;
+}
+
+@media screen and (max-width: 479px) {
+  .race-status {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .link-footer.is-footer .link-text {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+}
+
+/* Typographie (typeset) */
+/* Rôles : affichage Barlow 900 · étiquette Barlow 700 · action Barlow 700 espacé · texte DM Sans 500 */
+
+/* La pastille du hero reprend le rôle « étiquette » des autres tags */
+.bandeau {
+  letter-spacing: .5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Bandeau : assez grand pour être lu, pas seulement vu */
+.ticker-text {
+  letter-spacing: .04em;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+/* Coupures de ligne */
+.heading-1, .heading-2, .heading-3 {
+  text-wrap: balance;
+}
+
+.paragraph, .race-status, .course-card_text, .small-text {
+  text-wrap: pretty;
+}
+
+/* Texte courant : un peu plus d'interligne pour DM Sans */
+.paragraph {
+  line-height: 1.5;
+}
+
+/* Intro centrée de la section Courses : mesure de lecture limitée */
+.text-container.align-center .paragraph {
+  max-width: 38rem;
+}
+
+/* Texte clair sur fond sombre : interligne compensé */
+.race-status, .footer .small-text, .footer .link-text {
+  line-height: 1.55;
+}
+
+@media screen and (max-width: 479px) {
+  .heading-2.small-margin {
+    font-size: 3rem;
+  }
+
+  .ticker-text {
+    font-size: 1.1rem;
+  }
+
+}
+
+/* Titre « De l'ombre à la lumière » : la 2e ligne compte dans la hauteur du titre
+   (l'ancien line-height: 0 du span la faisait déborder sur le paragraphe), et un peu
+   d'air pour les accents des capitales (À, È). */
+.heading-2 .is-red {
+  line-height: inherit;
+}
+
+.heading-2.small-margin {
+  margin-bottom: 20px;
+  line-height: 92%;
+}
