@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Contact, Léonard Legrand</title>
+  <meta name="description" content="Contacter Léonard Legrand, skipper de Sodebo Fifty.">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preload" href="fonts/BarlowCondensed-Black.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/BarlowCondensed-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/DMSans-VariableFont_opsz,wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+  <link href="images/webclip.png" rel="apple-touch-icon">
+</head>
+<body>
+  <header class="navbar-wrapper w-nav is-scrolled">
+    <nav class="navbar-container" aria-label="Navigation principale">
+      <a href="index.html" class="w-nav-brand" aria-label="Léonard Legrand, accueil"><div class="logo">Léonard<span class="text-span">.</span>Legrand</div></a>
+      <a href="contact.html" class="button header" aria-current="page">Me contacter</a>
+    </nav>
+  </header>
+
+  <main class="form-wrapper is-page">
+    <div class="form-container">
+      <h1 class="heading-3 align-center">Me contacter</h1>
+      <div class="form-block w-form">
+        <form id="contact-form" name="contact-form" class="form" novalidate>
+          <div class="form-field">
+            <label for="nom" class="form-label">Nom</label>
+            <input class="field w-input" type="text" id="nom" name="nom" maxlength="256" autocomplete="family-name" required>
+          </div>
+          <div class="form-field">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input class="field w-input" type="text" id="prenom" name="prenom" maxlength="256" autocomplete="given-name" required>
+          </div>
+          <div class="form-field">
+            <label for="email" class="form-label">Email</label>
+            <input class="field w-input" type="email" id="email" name="email" maxlength="256" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="field w-input" id="message" name="message" maxlength="5000" rows="6" required></textarea>
+          </div>
+          <button type="submit" class="button red-background full-size">Envoyer</button>
+        </form>
+        <div class="w-form-done" role="status" hidden><div>Merci, votre message a bien été envoyé !</div></div>
+        <div class="w-form-fail" role="alert" hidden><div>Oups, un champ est mal rempli.</div></div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="contact" class="footer">
+    <div class="red-banner-container">
+      <div class="text-container is-footer">
+        <a href="#" class="w-nav-brand" aria-label="Léonard Legrand, retour en haut"><div class="logo">Léonard<span class="text-span">.</span>Legrand</div></a>
+        <div class="small-text is-dark">Skipper de Sodebo Fifty, cap sur la Guadeloupe.</div>
+      </div>
+      <div class="link-footer is-footer">
+        <div class="small-text is-dark">Me suivre</div>
+        <span class="link-text is-soon">Instagram <span class="link-soon">bientôt</span></span>
+        <span class="link-text is-soon">LinkedIn <span class="link-soon">bientôt</span></span>
+        <a href="https://www.sodebo-voile.com" target="_blank" rel="noopener" class="link-text">Sodebo Voile<span class="sr-only"> (nouvel onglet)</span></a>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="big-text-footer-container"><div class="bigtext-footer">Léonard Legrand</div></div>
+    <div class="footer-legal">Projet étudiant, site non officiel.</div>
+  </footer>
+
+  <script>
+    // Formulaire : le site est statique (GitHub Pages), rien n'est envoyé.
+    // On vérifie les champs, puis on affiche le message de succès ou d'erreur, comme un form Webflow.
+    (function () {
+      var form = document.getElementById('contact-form');
+      var block = form.closest('.w-form');
+      var done = block.querySelector('.w-form-done');
+      var fail = block.querySelector('.w-form-fail');
+      var fields = form.querySelectorAll('.field');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var firstBad = null;
+        fields.forEach(function (f) {
+          var ok = f.value.trim() !== '' && f.checkValidity();
+          f.setAttribute('aria-invalid', ok ? 'false' : 'true');
+          if (!ok && !firstBad) firstBad = f;
+        });
+        if (firstBad) {
+          fail.hidden = false;
+          firstBad.focus();
+          return;
+        }
+        fail.hidden = true;
+        form.hidden = true;
+        done.hidden = false;
+        // Le bouton a disparu avec le formulaire : le focus passe sur le message.
+        done.tabIndex = -1;
+        done.focus({ preventScroll: true });
+        block.scrollIntoView({ block: 'center' });
+      });
+
+      // L'alerte rouge disparaît dès qu'on corrige un champ.
+      fields.forEach(function (f) {
+        f.addEventListener('input', function () {
+          if (f.getAttribute('aria-invalid') === 'true' && f.value.trim() !== '' && f.checkValidity()) {
+            f.setAttribute('aria-invalid', 'false');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
