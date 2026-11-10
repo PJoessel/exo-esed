@@ -355,15 +355,17 @@ h3 {
 }
 
 .grid-x2 {
-  grid-column-gap: 40px;
-  grid-row-gap: 40px;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr 1fr;
-  grid-auto-columns: 1fr;
+  gap: 40px;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  display: grid;
+  display: flex; /* flexbox (règle du projet) : deux colonnes égales, empilées sous 768 px */
+}
+
+.grid-x2 > .grid-img,
+.grid-x2 > .grid-text {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .grid-img {
@@ -1185,8 +1187,8 @@ textarea.field.w-input {
 }
 
 .w-form-done {
-  color: var(--color-dark);
-  background-color: var(--color-accent);
+  color: var(--color-white);
+  background-color: var(--color-secondary); /* succès en vert, blanc dessus (9:1) */
   text-align: center;
   padding: 20px;
   font-family: Dm Sans, Arial, sans-serif;
@@ -1194,8 +1196,9 @@ textarea.field.w-input {
 }
 
 .w-form-fail {
-  color: var(--color-white);
-  background-color: var(--color-secondary);
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  border: 1px solid var(--color-accent-text); /* erreur : texte foncé, cadre orange foncé */
   margin-top: 16px;
   padding: 12px 16px;
   font-family: Dm Sans, Arial, sans-serif;
@@ -1374,4 +1377,77 @@ textarea.field.w-input {
   outline: 3px solid var(--color-accent);
   outline-offset: 3px;
   box-shadow: 0 0 0 3px var(--color-dark);
+}
+
+/* Formulaire : mention des champs obligatoires, message sous chaque champ, précision du succès */
+.form-required {
+  color: var(--color-dark);
+  margin: 0 0 20px;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.field-error {
+  color: var(--color-accent-text); /* 5:1 sur le blanc */
+  margin: 0;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.form-done-note {
+  margin-top: 8px;
+  font-size: .85rem;
+  font-weight: 500;
+}
+
+/* Footer : lien « Me contacter » sous la phrase d'accroche */
+.footer-contact {
+  align-self: flex-start;
+  padding: 6px 0; /* zone de clic plus haute */
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Layout (impeccable, 10/11) */
+/* À propos : photo au-dessus du texte dès la tablette (avant : deux colonnes jusqu'à 480 px) */
+@media screen and (max-width: 767px) {
+  .grid-x2 {
+    flex-flow: column;
+  }
+
+  .img-square.border-bottom {
+    width: 100%;
+    height: 20rem;
+  }
+}
+
+/* Pages course : les deux liens « Toutes mes courses » ont le même style et une vraie zone de clic */
+.course-detail_back {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  padding: 12px 0;
+}
+
+.course-detail_link {
+  padding: 12px 0;
+}
+
+/* Bouton de la nav sur la page en cours (contact) */
+.button.header[aria-current="page"] {
+  color: var(--color-dark);
+  background-color: var(--color-accent);
+}
+
+/* Typo (impeccable, 10/11) : rangs dans les résultats en majuscules.
+   « 3E » et « 1ER » ressemblaient à des fautes : l'abréviation reste en minuscule, en exposant. */
+.course-card_result sup {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: .7em;
+  line-height: 0;
+  vertical-align: .45em;
 }
