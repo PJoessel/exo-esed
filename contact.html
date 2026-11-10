@@ -14,7 +14,7 @@
   <link href="images/webclip.png" rel="apple-touch-icon">
 </head>
 <body>
-  <header class="navbar-wrapper w-nav is-scrolled">
+  <header class="navbar-wrapper w-nav">
     <nav class="navbar-container" aria-label="Navigation principale">
       <a href="index.html" class="w-nav-brand" aria-label="Léonard Legrand, accueil"><div class="logo">Léonard<span class="text-span">.</span>Legrand</div></a>
       <a href="contact.html" class="button header" aria-current="page">Me contacter</a>
@@ -23,7 +23,7 @@
 
   <main class="form-wrapper is-page">
     <div class="form-container">
-      <h1 class="heading-3 align-center">Me contacter</h1>
+      <h1 class="heading-3 is-white align-center">Me contacter</h1>
       <div class="form-block w-form">
         <form id="contact-form" name="contact-form" class="form" novalidate>
           <div class="form-field">
@@ -69,6 +69,16 @@
   </footer>
 
   <script>
+    // Barre de navigation : transparente sur la photo, fond crème dès qu'on descend
+    // (même comportement que sur l'accueil).
+    (function () {
+      var nav = document.querySelector('.navbar-wrapper');
+      function update() { nav.classList.toggle('is-scrolled', window.scrollY > 60); }
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('load', update);
+    })();
+
     // Formulaire : le site est statique (GitHub Pages), rien n'est envoyé.
     // On vérifie les champs, puis on affiche le message de succès ou d'erreur, comme un form Webflow.
     (function () {

@@ -1111,6 +1111,11 @@ section[id], footer[id] {
 .form-wrapper.is-page {
   min-height: 70vh;
   padding-top: 160px;
+  /* Photo du hero, voile noir plus fort qu'en accueil (75 % au lieu de 50 %) */
+  background-color: var(--color-dark);
+  background-image: linear-gradient(color-mix(in srgb, var(--color-dark) 75%, transparent), color-mix(in srgb, var(--color-dark) 75%, transparent)), url("images/hero-sodebo.webp");
+  background-position: 60% 50%;
+  background-size: cover;
 }
 
 .form-block {
