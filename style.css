@@ -1211,3 +1211,144 @@ textarea.field.w-input {
     padding: 24px;
   }
 }
+
+/* Pages détail des courses (courses/*.html) : même gabarit pour les 4 */
+.course-detail {
+  background-color: var(--color-light);
+  padding: 140px 40px 80px;
+}
+
+.course-detail_container {
+  flex-flow: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+
+.course-detail_back {
+  color: var(--color-dark);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-underline-offset: 4px;
+  align-self: flex-start;
+  padding: 6px 0;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.course-detail_back:hover {
+  text-decoration: underline;
+}
+
+.course-detail_header {
+  flex-flow: column;
+  gap: 16px;
+  display: flex;
+}
+
+.course-detail_title {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-wrap: balance;
+}
+
+.course-card_result.is-large {
+  font-size: 1.5rem;
+  text-wrap: balance;
+}
+
+.course-detail_image {
+  border: 1px solid var(--color-border);
+  border-bottom: 5px solid var(--color-accent);
+}
+
+.course-detail_info {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  flex-flow: wrap;
+  gap: 24px 32px;
+  margin: 0;
+  padding: 24px 0;
+  display: flex;
+}
+
+.course-detail_info-item {
+  flex-flow: column;
+  flex: 1 1 8rem;
+  gap: 6px;
+  min-width: 0;
+  display: flex;
+}
+
+/* Parcours : deux noms de lieux, on lui laisse la place de ne pas couper « Pointe-à-Pitre » */
+.course-detail_info-item.is-wide {
+  flex: 2 1 16rem;
+}
+
+/* Un nom de lieu ne se coupe pas à ses tirets (Saint-Brieuc, Pointe-à-Pitre) */
+.course-detail_place {
+  white-space: nowrap;
+}
+
+.course-detail_info-label {
+  color: var(--color-accent-text);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-family: Barlow Condensed, Arial, sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.course-detail_info-value {
+  color: var(--color-dark);
+  margin-left: 0;
+  font-family: Dm Sans, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.course-detail_info-value.is-empty {
+  font-style: italic; /* le gris du site (3,9:1 sur le crème) ne passe pas AA */
+  font-weight: 500;
+}
+
+.course-detail_recap {
+  max-width: 38rem;
+}
+
+.course-detail_recap .paragraph {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.course-detail_link {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .course-detail {
+    padding: 112px 20px 56px;
+  }
+
+  .course-detail_container {
+    gap: 24px;
+  }
+
+  .course-detail_info-item {
+    flex-basis: calc(50% - 16px);
+  }
+
+  .course-detail_info-item.is-wide {
+    flex-basis: 100%;
+  }
+}
