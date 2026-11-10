@@ -1352,3 +1352,26 @@ textarea.field.w-input {
     flex-basis: 100%;
   }
 }
+
+/* Cards de la home : toute la card est cliquable. Le lien « Voir la course » reste le seul
+   lien (un seul arrêt au clavier, nom clair) et s'étire sur la card avec un ::after. */
+.course-card {
+  position: relative;
+}
+
+.course-card .course-card_link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.course-card .course-card_link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.course-card .course-card_link:focus-visible::after {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--color-dark);
+}
