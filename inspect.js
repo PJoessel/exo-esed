@@ -1,6 +1,6 @@
 /* Inspecteur pour les cours.
    Un bouton « Inspecter » flotte en bas à gauche de chaque page (ordinateur seulement).
-   - Survoler un élément : marges en orange, padding en vert, taille, police.
+   - Survoler un élément : marges en orange, padding en vert, tailles écrites dans le CSS, police.
    - Cliquer : sélectionne l'élément. Survoler un autre élément : distance entre les deux.
    - Échap : désélectionne. Re-cliquer sur le bouton : arrête l'inspection.
    Le mode reste allumé d'une page à l'autre. ?inspect dans l'adresse l'allume directement. */
@@ -87,6 +87,45 @@
     else if (A.left >= B.right) line(B.right, my, A.left, my);
   }
 
+  /* ---------- Tailles écrites dans le code ---------- */
+  // Un texte a toujours une taille à l'écran, mais elle vient de son contenu.
+  // On n'affiche que les tailles écrites dans le CSS (ou dans le HTML pour une image).
+  var SIZE_PROPS = ['width', 'height', 'min-width', 'max-width', 'min-height', 'max-height'];
+  var rulesCache = null;
+
+  function allRules() {
+    if (rulesCache) return rulesCache;
+    rulesCache = [];
+    function walk(list, media) {
+      for (var i = 0; i < list.length; i++) {
+        var r = list[i];
+        if (r.selectorText !== undefined && r.style) rulesCache.push({ rule: r, media: media });
+        else if (r.media && r.cssRules) walk(r.cssRules, r.media.mediaText);
+        else if (r.cssRules) walk(r.cssRules, media);
+      }
+    }
+    for (var i = 0; i < document.styleSheets.length; i++) {
+      try { walk(document.styleSheets[i].cssRules, null); } catch (e) { /* feuille d'un autre site (polices) */ }
+    }
+    return rulesCache;
+  }
+
+  function authored(node) {
+    var found = {};
+    ['width', 'height'].forEach(function (k) { if (node.hasAttribute && node.hasAttribute(k) && /^(IMG|VIDEO|IFRAME|CANVAS|SVG)$/i.test(node.tagName)) found[k] = node.getAttribute(k) + ' px'; });
+    allRules().forEach(function (o) {
+      if (o.media && !matchMedia(o.media).matches) return;
+      var ok = false;
+      try { ok = node.matches(o.rule.selectorText); } catch (e) { return; }
+      if (!ok) return;
+      SIZE_PROPS.forEach(function (k) { var v = o.rule.style.getPropertyValue(k); if (v) found[k] = v; });
+    });
+    SIZE_PROPS.forEach(function (k) { var v = node.style.getPropertyValue(k); if (v) found[k] = v; });
+    var out = {};
+    SIZE_PROPS.forEach(function (k) { var v = found[k]; if (v && !/^(auto|none|initial|unset|normal)$/.test(v)) out[k] = v; });
+    return out;
+  }
+
   /* ---------- Panneau d'infos ---------- */
 
   function name(node) {
@@ -106,7 +145,7 @@
           '<div style="position:relative;flex:1;padding:16px 8px 6px;border:1px solid ' + COL.padding + ';border-radius:5px;background:rgba(111,207,135,.12);">' + lbl('padding', COL.padding) +
             '<div>' + v(R.p.t) + '</div>' +
             '<div style="display:flex;align-items:center;gap:6px;">' + v(R.p.l) +
-              '<div style="flex:1;padding:6px 4px;border:1px solid ' + COL.contenu + ';border-radius:4px;background:rgba(91,140,255,.14);color:' + COL.texte + ';white-space:nowrap;">' + Math.round(R.content.w) + ' × ' + Math.round(R.content.h) + '</div>' +
+              '<div style="flex:1;padding:6px 4px;border:1px solid ' + COL.contenu + ';border-radius:4px;background:rgba(91,140,255,.14);color:' + COL.texte + ';white-space:nowrap;">' + (R.a.width || R.a.height ? Math.round(R.content.w) + ' × ' + Math.round(R.content.h) : 'auto') + '</div>' +
             v(R.p.r) + '</div>' +
             '<div>' + v(R.p.b) + '</div>' +
           '</div>' +
@@ -121,14 +160,16 @@
 
   function info(node, R) {
     var s = R.s, html = '<div style="font-family:Menlo,Consolas,monospace;font-size:12px;word-break:break-all;margin-bottom:4px;">' + name(node) + '</div>';
-    html += row('Taille', Math.round(R.border.w) + ' × ' + Math.round(R.border.h) + ' px');
+    var keys = Object.keys(R.a);
+    if (keys.length) keys.forEach(function (k) { html += row(k, R.a[k]); });
+    else html += row('Taille', '<span style="color:' + COL.doux + '">auto, selon le contenu</span>');
     if (/flex|grid/.test(s.display)) {
       var gap = s.gap === 'normal' ? '0' : s.gap.replace(/(\d+(\.\d+)?)px/g, function (_, x) { return Math.round(x) + ' px'; });
       html += row('Display', s.display + (s.display.indexOf('flex') > -1 ? ' (' + s.flexDirection + ')' : ''));
       html += row('Gap', gap);
     }
     var font = s.fontFamily.split(',')[0].replace(/["']/g, '');
-    html += row('Police', font + ' ' + s.fontWeight + ', ' + n(s.fontSize) + ' px');
+    if (!/^(IMG|VIDEO|SVG|IFRAME|CANVAS)$/i.test(node.tagName)) html += row('Police', font + ' ' + s.fontWeight + ', ' + n(s.fontSize) + ' px');
     html += schema(R);
     return html;
   }
@@ -150,13 +191,17 @@
     if (!target) { panel.innerHTML = help(); place(); return; }
 
     var R = boxes(target);
+    R.a = authored(target);
     bands(R.outer, R.border, COL.margeFond);
     bands(R.pad, R.content, COL.paddingFond);
     rect(R.border, 'outline:1px solid ' + COL.contenu + ';');
-    if (target !== selected) {
+    var dims = [];
+    if (R.a.width) dims.push('width ' + R.a.width);
+    if (R.a.height) dims.push('height ' + R.a.height);
+    if (target !== selected && dims.length) {
       var y = R.border.y + R.border.h + 12;
       if (y > innerHeight - 10) y = R.border.y - 12;
-      chip(Math.round(R.border.w) + ' × ' + Math.round(R.border.h), R.border.x + R.border.w / 2, y, COL.contenu);
+      chip(dims.join(' · '), R.border.x + R.border.w / 2, y, COL.contenu);
     }
     if (selected && hovered && hovered !== selected) distances(selected, hovered);
 
