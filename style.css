@@ -292,16 +292,6 @@ h3 {
   line-height: 1.5;
 }
 
-.hero-cta {
-  justify-content: flex-end;
-  align-items: center;
-  padding-left: 8rem;
-  padding-right: 8rem;
-  display: flex;
-  position: absolute;
-  inset: auto 0% 4%;
-}
-
 .paragraph {
   color: var(--color-light);
   letter-spacing: 0;
@@ -323,6 +313,13 @@ h3 {
   grid-column-gap: 16px;
   grid-row-gap: 16px;
   display: flex;
+}
+
+/* Hero : les boutons sont dans la même div que le titre, juste dessous */
+.hero-container .multiple-button-container {
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
 }
 
 .ticker-wrapper {
@@ -805,13 +802,6 @@ h3 {
 
   .heading-1.hero-section {
     font-size: 6rem;
-  }
-
-  .hero-cta {
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
   }
 
   .multiple-button-container {
